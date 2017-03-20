@@ -14,9 +14,8 @@ public class LoadTest {
 			System.out.println("------");
 			System.out.println(aluno.getNome());
 			System.out.println(aluno.getCpf());
-			System.out.println(aluno.getGenero());
+			System.out.println(aluno.getGenero().getDescricao());
 			System.out.println(aluno.getMatricula().get(0).getDataMatricula());
-			System.out.println("------");
 		}
 	}
 }

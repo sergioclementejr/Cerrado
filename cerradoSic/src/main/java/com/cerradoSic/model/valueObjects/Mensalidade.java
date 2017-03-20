@@ -9,8 +9,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "mensalidade")
 public class Mensalidade {
-	@Id
-	@GeneratedValue
+	@Id	@GeneratedValue
 	@Column(name = "idt_mensalidade")
 	private int id;
 

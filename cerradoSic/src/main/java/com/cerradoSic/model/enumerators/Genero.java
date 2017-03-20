@@ -1,9 +1,15 @@
 package com.cerradoSic.model.enumerators;
 
-public enum Genero {
+import javax.persistence.AttributeConverter;
+import javax.persistence.Converter;
+import javax.persistence.Entity;
 
+@Entity
+public enum Genero {
+  
   MASCULINO(1,'M',"Masculino"),
-  FEMININO(2,'F',"Feminino");
+  FEMININO(2,'F',"Feminino"),
+  NULL(3,'N', "Não Definido");
   
   private int id;
   private char acronimo;
@@ -33,5 +39,6 @@ public enum Genero {
   public void setAcronimo(char acronimo) {
     this.acronimo = acronimo;
   }
-  
 }
+
+

@@ -3,12 +3,16 @@ package com.cerradoSic.model.valueObjects;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.cerradoSic.model.enumerators.Genero;
+import com.cerradoSic.model.enumerators.GeneroConverter;
 
 @Entity
 @Table(name = "aluno")
@@ -18,16 +22,17 @@ public class Aluno {
 	@Column(name="idt_aluno")
 	private int id;
 	
-	@Column(name="cpf")
+	@Column(name="cod_cpf")
 	private String cpf;
 	
 	@Column(name="nme_aluno")
 	private String nome;
 	
 	@Column(name="ind_genero")
-	private int Genero;
+	@Convert(converter=GeneroConverter.class)
+	private Genero genero;
 	
-	@Column(name="observacao")
+	@Column(name="dsc_aluno")
 	private String observacao;
 	
 	@OneToMany(mappedBy="aluno", fetch=FetchType.EAGER)
@@ -65,12 +70,12 @@ public class Aluno {
 		this.observacao = observacao;
 	}
 
-	public int getGenero() {
-		return Genero;
+	public Genero getGenero() {
+		return genero;
 	}
 
-	public void setGenero(int genero) {
-		Genero = genero;
+	public void setGenero(Genero genero) {
+		this.genero = genero;
 	}
 
 	public List<Matricula> getMatricula() {
