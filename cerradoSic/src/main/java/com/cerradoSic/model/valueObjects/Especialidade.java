@@ -25,9 +25,6 @@ public class Especialidade {
 	@Column(name="dsc_especialidade")
 	private String descricao;
 	@ManyToMany(mappedBy="especialidades")
-//	@JoinTable(name = "curriculo",
-//  joinColumns = @JoinColumn(name = "idt_especialidade"),
-//  inverseJoinColumns = @JoinColumn(name = "idt_professor"))
 	List<Professor> professores = new ArrayList<Professor>();
 	
 	public int getId() {

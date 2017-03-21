@@ -25,9 +25,6 @@ public class Modalidade {
 	@Column(name="dsc_modalidade")
 	private String descricao;
 	@ManyToMany(mappedBy="modalidades")
-//	@JoinTable(name = "leciona",
-//  joinColumns = @JoinColumn(name = "idt_modalidade"),
-//  inverseJoinColumns = @JoinColumn(name = "idt_professor"))
   List<Professor> professores = new ArrayList<Professor>();
 	
 	public int getId() {
