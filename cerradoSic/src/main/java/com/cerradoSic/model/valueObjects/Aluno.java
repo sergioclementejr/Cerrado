@@ -4,6 +4,7 @@ package com.cerradoSic.model.valueObjects;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -14,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.cerradoSic.model.enumerators.Genero;
 import com.cerradoSic.model.enumerators.GeneroConverter;
@@ -22,6 +25,8 @@ import com.cerradoSic.util.ListComparator;
 
 @Entity
 @Table(name = "aluno")
+@Cacheable
+@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 public class Aluno {
 
   @Id
@@ -156,5 +161,12 @@ public class Aluno {
     else if (!observacao.equals(other.observacao))
       return false;
     return true;
+  }
+
+  @Override
+  public String toString() {
+    return "Aluno [id=" + id + ", cpf=" + cpf + ", nome=" + nome +
+      ", genero=" + genero + ", observacao=" + observacao +
+      ", matriculas=" + matriculas + "]";
   }
 }

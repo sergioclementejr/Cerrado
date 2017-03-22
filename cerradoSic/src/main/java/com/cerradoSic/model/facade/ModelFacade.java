@@ -27,7 +27,8 @@ public class ModelFacade {
   private static Configuration con;
   private static StandardServiceRegistryBuilder builder;
   private static SessionFactory sessionFactory;
-  private static final String MODEL_CLASS_PATH = "com.cerradoSic.model.valueObjects";
+  private static final String MODEL_CLASS_PATH =
+    "com.cerradoSic.model.valueObjects";
 
   public static ModelFacade getInstance() {
     if (modelFacade == null) {
@@ -44,6 +45,10 @@ public class ModelFacade {
     builder =
       new StandardServiceRegistryBuilder().applySettings(con.getProperties());
     sessionFactory = con.buildSessionFactory(builder.build());
+  }
+  
+  public SessionFactory getSessionFactory(){
+    return sessionFactory;
   }
 
   public void insert(Object obj) {
@@ -62,6 +67,9 @@ public class ModelFacade {
       e.printStackTrace();
     }
     catch (Exception e) {
+      if (t != null) {
+        t.rollback();
+      }
       e.printStackTrace();
     }
     finally {
@@ -84,13 +92,16 @@ public class ModelFacade {
       e.printStackTrace();
     }
     catch (Exception e) {
+      if (t != null) {
+        t.rollback();
+      }
       e.printStackTrace();
     }
     finally {
       session.close();
     }
   }
-  
+
   public void delete(Object obj) {
     Session session = sessionFactory.openSession();
     Transaction t = null;
@@ -106,6 +117,9 @@ public class ModelFacade {
       e.printStackTrace();
     }
     catch (Exception e) {
+      if (t != null) {
+        t.rollback();
+      }
       e.printStackTrace();
     }
     finally {
@@ -115,14 +129,27 @@ public class ModelFacade {
 
   public <T> T load(Class<T> c, int id) {
     Session session = sessionFactory.openSession();
+    Transaction t = null;
     try {
-      return (T) session.get(c, id);
+      t = session.beginTransaction();
+      T o = (T) session.get(c, id);
+      t.commit();
+      return o;
     }
     catch (HibernateException e) {
+      if (t != null) {
+        t.rollback();
+      }
       e.printStackTrace();
     }
     catch (Exception e) {
+      if (t != null) {
+        t.rollback();
+      }
       e.printStackTrace();
+    }
+    finally {
+      session.close();
     }
     return null;
   }
@@ -130,19 +157,22 @@ public class ModelFacade {
   public <T> List<T> loadAll(Class<T> c) {
     Session session = sessionFactory.openSession();
     List<T> list = new ArrayList<T>();
-    Transaction tx = null;
+    Transaction t = null;
     try {
-      tx = session.beginTransaction();
+      t = session.beginTransaction();
       Criteria criteria = session.createCriteria(c);
       list = criteria.list();
-      tx.commit();
+      t.commit();
     }
     catch (HibernateException e) {
-      if (tx != null)
-        tx.rollback();
+      if (t != null)
+        t.rollback();
       e.printStackTrace();
     }
     catch (Exception e) {
+      if (t != null) {
+        t.rollback();
+      }
       e.printStackTrace();
     }
     finally {
@@ -168,6 +198,9 @@ public class ModelFacade {
       e.printStackTrace();
     }
     catch (Exception e) {
+      if (t != null) {
+        t.rollback();
+      }
       e.printStackTrace();
     }
     finally {
@@ -193,13 +226,16 @@ public class ModelFacade {
       e.printStackTrace();
     }
     catch (Exception e) {
+      if (t != null) {
+        t.rollback();
+      }
       e.printStackTrace();
     }
     finally {
       session.close();
     }
   }
-  
+
   public void multiDelete(Object[] obj) {
     Session session = sessionFactory.openSession();
     Transaction t = null;
@@ -217,6 +253,9 @@ public class ModelFacade {
       e.printStackTrace();
     }
     catch (Exception e) {
+      if (t != null) {
+        t.rollback();
+      }
       e.printStackTrace();
     }
     finally {
