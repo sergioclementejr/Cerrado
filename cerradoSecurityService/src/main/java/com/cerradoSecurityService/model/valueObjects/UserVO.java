@@ -6,30 +6,30 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="usuario")
-public class Usuario {
+@Table(name="user")
+public class UserVO {
   @Id
-  @Column(name="idt_user")
-  private String id;
+  @Column(name="username")
+  private String username;
   
-  @Column(name="psw_user")
+  @Column(name="password")
   private String password;
   
-  @Column(name="nme_user")
-  private String nome;
+  @Column(name="full_name")
+  private String name;
   
-  @Column(name="email_user")
-  private String email;
-  
-  @Column(name="role_user")
+  @Column(name="role")
   private String role;
+  
+  @Column(name="enabled")
+  private String enabled;
 
-  public String getId() {
-    return id;
+  public String getUsername() {
+    return username;
   }
 
-  public void setId(String id) {
-    this.id = id;
+  public void setUsername(String username) {
+    this.username = username;
   }
 
   public String getPassword() {
@@ -40,20 +40,12 @@ public class Usuario {
     this.password = password;
   }
 
-  public String getNome() {
-    return nome;
+  public String getName() {
+    return name;
   }
 
-  public void setNome(String nome) {
-    this.nome = nome;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
+  public void setName(String name) {
+    this.name = name;
   }
 
   public String getRole() {
@@ -64,15 +56,23 @@ public class Usuario {
     this.role = role;
   }
 
+  public String getEnabled() {
+    return enabled;
+  }
+
+  public void setEnabled(String enabled) {
+    this.enabled = enabled;
+  }
+
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((email == null)? 0: email.hashCode());
-    result = prime * result + ((id == null)? 0: id.hashCode());
-    result = prime * result + ((nome == null)? 0: nome.hashCode());
+    result = prime * result + ((enabled == null)? 0: enabled.hashCode());
+    result = prime * result + ((name == null)? 0: name.hashCode());
     result = prime * result + ((password == null)? 0: password.hashCode());
     result = prime * result + ((role == null)? 0: role.hashCode());
+    result = prime * result + ((username == null)? 0: username.hashCode());
     return result;
   }
 
@@ -84,24 +84,18 @@ public class Usuario {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    Usuario other = (Usuario) obj;
-    if (email == null) {
-      if (other.email != null)
+    UserVO other = (UserVO) obj;
+    if (enabled == null) {
+      if (other.enabled != null)
         return false;
     }
-    else if (!email.equals(other.email))
+    else if (!enabled.equals(other.enabled))
       return false;
-    if (id == null) {
-      if (other.id != null)
+    if (name == null) {
+      if (other.name != null)
         return false;
     }
-    else if (!id.equals(other.id))
-      return false;
-    if (nome == null) {
-      if (other.nome != null)
-        return false;
-    }
-    else if (!nome.equals(other.nome))
+    else if (!name.equals(other.name))
       return false;
     if (password == null) {
       if (other.password != null)
@@ -115,12 +109,18 @@ public class Usuario {
     }
     else if (!role.equals(other.role))
       return false;
+    if (username == null) {
+      if (other.username != null)
+        return false;
+    }
+    else if (!username.equals(other.username))
+      return false;
     return true;
   }
 
   @Override
   public String toString() {
-    return "Usuario [id=" + id + ", password=" + password + ", nome=" +
-      nome + ", email=" + email + ", role=" + role + "]";
+    return "Usuario [username=" + username + ", password=" + password +
+      ", name=" + name + ", role=" + role + ", enabled=" + enabled + "]";
   }
 }

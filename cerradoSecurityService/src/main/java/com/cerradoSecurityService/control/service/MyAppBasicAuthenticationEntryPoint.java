@@ -1,4 +1,4 @@
-package com.cerradoSecurityService.control.components;
+package com.cerradoSecurityService.control.service;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,9 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
-
 @Component
-public class CerradoSecurityBasicAuthenticationEntryPoint extends BasicAuthenticationEntryPoint {
+public class MyAppBasicAuthenticationEntryPoint extends BasicAuthenticationEntryPoint {
   @Override
   public void commence(HttpServletRequest request, HttpServletResponse response,
          AuthenticationException authException) throws IOException, ServletException {

@@ -9,29 +9,29 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.cerradoSecurityService.control.components.CerradoSecurityBasicAuthenticationEntryPoint;
-import com.cerradoSecurityService.control.service.CerradoUserService;
+import com.cerradoSecurityService.control.service.MyAppBasicAuthenticationEntryPoint;
+import com.cerradoSecurityService.control.service.MyAppUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled=true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Autowired
-  private CerradoUserService userService;  
+  private MyAppUserDetailsService myAppUserDetailsService;  
   @Autowired
-  private CerradoSecurityBasicAuthenticationEntryPoint cerradoSecurityBasicAuthenticationEntryPoint;
+  private MyAppBasicAuthenticationEntryPoint myAppBasicAuthenticationEntryPoint;
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.csrf().disable()
         .authorizeRequests()
         .antMatchers("/user/**").hasAnyRole("ADMIN","USER")
         .and().httpBasic().realmName("MY APP REALM")
-        .authenticationEntryPoint(cerradoSecurityBasicAuthenticationEntryPoint);
+        .authenticationEntryPoint(myAppBasicAuthenticationEntryPoint);
   } 
   
   @Autowired
   public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-             auth.userDetailsService(userService).passwordEncoder(passwordEncoder);
+             auth.userDetailsService(myAppUserDetailsService).passwordEncoder(passwordEncoder);
   }
 } 
