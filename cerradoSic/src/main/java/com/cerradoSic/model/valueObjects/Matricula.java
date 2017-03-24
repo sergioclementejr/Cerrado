@@ -18,8 +18,6 @@ import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name="mes_matricula")
-@Cacheable
-@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 public class Matricula {
 
 	@Id @GeneratedValue

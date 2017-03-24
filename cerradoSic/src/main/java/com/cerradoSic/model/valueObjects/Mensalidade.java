@@ -12,8 +12,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
 @Table(name = "mensalidade")
-@Cacheable
-@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 public class Mensalidade {
 	@Id	@GeneratedValue
 	@Column(name = "idt_mensalidade")

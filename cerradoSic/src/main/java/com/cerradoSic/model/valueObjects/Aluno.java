@@ -4,7 +4,6 @@ package com.cerradoSic.model.valueObjects;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -13,10 +12,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.apache.commons.collections4.CollectionUtils;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.cerradoSic.model.enumerators.Genero;
 import com.cerradoSic.model.enumerators.GeneroConverter;
@@ -25,8 +24,6 @@ import com.cerradoSic.util.ListComparator;
 
 @Entity
 @Table(name = "aluno")
-@Cacheable
-@Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 public class Aluno {
 
   @Id
@@ -37,6 +34,7 @@ public class Aluno {
   @Column(name = "cod_cpf")
   private String cpf;
 
+  @NotNull(message="{campo.null}")
   @Column(name = "nme_aluno")
   private String nome;
 
@@ -44,6 +42,7 @@ public class Aluno {
   @Convert(converter = GeneroConverter.class)
   private Genero genero;
 
+  @NotNull @Size(min=5,max=8, message="{test.teste}")
   @Column(name = "dsc_aluno")
   private String observacao;
 

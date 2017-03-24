@@ -1,6 +1,7 @@
 package com.cerradoSic.model.facade;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,12 +13,6 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
-import com.cerradoSic.model.valueObjects.Aluno;
-import com.cerradoSic.model.valueObjects.Especialidade;
-import com.cerradoSic.model.valueObjects.Matricula;
-import com.cerradoSic.model.valueObjects.Mensalidade;
-import com.cerradoSic.model.valueObjects.Modalidade;
-import com.cerradoSic.model.valueObjects.Professor;
 import com.cerradoSic.util.ClassFinder;
 
 
@@ -127,7 +122,7 @@ public class ModelFacade {
     }
   }
 
-  public <T> T load(Class<T> c, int id) {
+  public <T> T load(Class<T> c, Serializable id) {
     Session session = sessionFactory.openSession();
     Transaction t = null;
     try {

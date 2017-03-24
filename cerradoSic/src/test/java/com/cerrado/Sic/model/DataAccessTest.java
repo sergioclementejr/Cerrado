@@ -5,13 +5,13 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.cerradoSic.model.facade.ModelFacade;
-import com.cerradoSic.model.factory.TestModelFactory;
 import com.cerradoSic.model.valueObjects.Aluno;
 import com.cerradoSic.model.valueObjects.Especialidade;
 import com.cerradoSic.model.valueObjects.Matricula;
 import com.cerradoSic.model.valueObjects.Mensalidade;
 import com.cerradoSic.model.valueObjects.Modalidade;
 import com.cerradoSic.model.valueObjects.Professor;
+import com.cerradoSic.test.factory.TestModelFactory;
 
 
 public class DataAccessTest {
@@ -24,7 +24,7 @@ public class DataAccessTest {
   }
 
   @Test
-  public void testAlunoInsert() {
+  public void testAluno() {
     Aluno aluno = factory.createAluno();
     facade.insert(aluno);
     Aluno aluno2 = facade.load(Aluno.class, aluno.getId());

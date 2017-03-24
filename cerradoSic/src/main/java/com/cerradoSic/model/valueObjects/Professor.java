@@ -38,12 +38,12 @@ public class Professor {
   private Genero genero;
   @Column(name = "dsc_professor")
   private String descricao;
-  @ManyToMany(fetch=FetchType.EAGER)
+  @ManyToMany(fetch=FetchType.LAZY)
   @JoinTable(name = "curriculo",
              joinColumns = @JoinColumn(name = "idt_professor"),
              inverseJoinColumns = @JoinColumn(name = "idt_especialidade"))
   private List<Especialidade> especialidades = new ArrayList<Especialidade>();
-  @ManyToMany(fetch=FetchType.EAGER)
+  @ManyToMany(fetch=FetchType.LAZY)
   @JoinTable(name = "leciona",
              joinColumns = @JoinColumn(name = "idt_professor"),
              inverseJoinColumns = @JoinColumn(name = "idt_modalidade"))
